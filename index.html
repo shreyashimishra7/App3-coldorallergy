@@ -26,29 +26,33 @@ This app is for educational purposes only and does not provide medical advice.
 -->
 	
 <head> 
+	<!-- Title that appears in the browser tab -->
 	<title>Cold or Allergies App</title>  
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" href="w3.css">
 	<link rel="stylesheet" href="w3-colors-flat.css">
 
 	<style>
-	/* Page system provided in assignment handout */
+	/* Removes default margin around the page */
 	.body {
 		margin: 0em;
 	}
 
+	/* Each "page" fills the entire screen */
 	.page {
-		width: 100vw;
-		height: 100vh;
-		position: fixed;
+		width: 100vw;              /* Full viewport width */
+		height: 100vh;             /* Full viewport height */
+		position: fixed;           /* Keeps page fixed while navigating */
 		top: 0;
-		left: -100vw;
-		overflow-y: auto;
+		left: -100vw;              /* Starts off-screen to the left */
+		overflow-y: auto;          /* Allows scrolling if content is tall */
 		z-index: 0;
 		background-color: hsl(0,0%,100%);
 	}
 
+	/* When a page is targeted by an anchor link, it slides into view */
 	.page:target {
 		left: 0vw;
 		z-index: 1;
@@ -56,53 +60,59 @@ This app is for educational purposes only and does not provide medical advice.
 	</style>
 
 	<script>
-	// Variables used to store user responses
-	var allergy_count = 0;
-	var cold_count = 0;
+		/* Variables that keep track of answers */
+		var allergy_count = 0;
+		var cold_count = 0;
 
-	// Adds one point toward allergy
-	function allergyAdd(){
-		allergy_count = allergy_count + 1;
-	}
+		/* Increases allergy score by 1 */
+		function allergyAdd(){
+			allergy_count = allergy_count + 1;
+		}
 
-	// Adds one point toward cold
-	function coldAdd(){
-		cold_count = cold_count + 1;
-	}
+		/* Increases cold score by 1 */
+		function coldAdd(){
+			cold_count = cold_count + 1;
+		}
 
-	// Calculates and displays final results
-	function showResults(){
-		var total = allergy_count + cold_count;
+		/* Calculates percentages and displays results */
+		function showResults(){
+			/* Total number of answered questions */
+			var total = allergy_count + cold_count;
 
-		var allergyPercent = (allergy_count / total) * 100;
-		var coldPercent = (cold_count / total) * 100;
+			/* Convert counts to percentages */
+			var allergyPercent = (allergy_count / total) * 100;
+			var coldPercent = (cold_count / total) * 100;
 
-		var resultText = document.getElementById("results");
-		resultText.innerHTML =
-			"Probability it is allergies = " + allergyPercent + "%<br>" +
-			"Probability it is a cold = " + coldPercent + "%";
-	}
+			/* Display results in the paragraph with id="results" */
+			document.getElementById("results").innerHTML =
+				"Probability it is allergies = " + allergyPercent + "%<br>" +
+				"Probability it is a cold = " + coldPercent + "%";
+		}
 	</script>
 </head> 
 
 <body>
 
-<!-- Intro Page -->
+<!-- Header section visible on the intro screen -->
 <div id="header" class="w3-container w3-flat-carrot">
 	<h1>Cold or Allergies?</h1>
 </div>
 
+<!-- Intro content explaining the app -->
 <div id="content" class="w3-container">
-	<p>Answer a few short questions to estimate whether your symptoms are more likely allergies or a cold.</p>
+	<p>
+		Answer a few short questions to estimate whether your symptoms are more likely allergies or a cold.
+	</p>
 
+	<!-- Button navigates to first question -->
 	<a href="#one" class="w3-btn w3-grey w3-round">Get Started</a>
 
 	<p>
-	This app was created for a class assignment and should not be used for medical diagnosis.
+		This app was created for a class assignment and should not be used for medical diagnosis.
 	</p>
 </div>
 
-<!-- Question 1 -->
+<!-- Question 1 Page -->
 <div class="page" id="one">
 	<div class="w3-container w3-flat-carrot">
 		<h1>Question 1</h1>
@@ -110,12 +120,16 @@ This app is for educational purposes only and does not provide medical advice.
 
 	<div class="w3-container">
 		<p>Are your eyes watery or itchy?</p>
-		<a href="#two" onclick="allergyAdd();" class="w3-btn w3-black">Yes</a>
+
+		<!-- Yes increases allergy score -->
+		<a href="#two" onclick="allergyAdd();" class="w3-btn w3-black w3-margin-right">Yes</a>
+
+		<!-- No increases cold score -->
 		<a href="#two" onclick="coldAdd();" class="w3-btn w3-black">No</a>
 	</div>
 </div>
 
-<!-- Question 2 -->
+<!-- Question 2 Page -->
 <div class="page" id="two">
 	<div class="w3-container w3-flat-carrot">
 		<h1>Question 2</h1>
@@ -123,12 +137,13 @@ This app is for educational purposes only and does not provide medical advice.
 
 	<div class="w3-container">
 		<p>Do you have a fever?</p>
-		<a href="#three" onclick="coldAdd();" class="w3-btn w3-black">Yes</a>
+
+		<a href="#three" onclick="coldAdd();" class="w3-btn w3-black w3-margin-right">Yes</a>
 		<a href="#three" onclick="allergyAdd();" class="w3-btn w3-black">No</a>
 	</div>
 </div>
 
-<!-- Question 3 -->
+<!-- Question 3 Page -->
 <div class="page" id="three">
 	<div class="w3-container w3-flat-carrot">
 		<h1>Question 3</h1>
@@ -136,12 +151,13 @@ This app is for educational purposes only and does not provide medical advice.
 
 	<div class="w3-container">
 		<p>Do you have a sore throat?</p>
-		<a href="#four" onclick="coldAdd();" class="w3-btn w3-black">Yes</a>
+
+		<a href="#four" onclick="coldAdd();" class="w3-btn w3-black w3-margin-right">Yes</a>
 		<a href="#four" onclick="allergyAdd();" class="w3-btn w3-black">No</a>
 	</div>
 </div>
 
-<!-- Question 4 -->
+<!-- Question 4 Page -->
 <div class="page" id="four">
 	<div class="w3-container w3-flat-carrot">
 		<h1>Question 4</h1>
@@ -149,34 +165,9 @@ This app is for educational purposes only and does not provide medical advice.
 
 	<div class="w3-container">
 		<p>Are your symptoms seasonal or chronic?</p>
-		<a href="#five" onclick="allergyAdd();" class="w3-btn w3-black">Yes</a>
-		<a href="#five" onclick="coldAdd();" class="w3-btn w3-black">No</a>
-	</div>
-</div>
 
-<!-- New Allergy Question -->
-<div class="page" id="five">
-	<div class="w3-container w3-flat-carrot">
-		<h1>Question 5</h1>
-	</div>
-
-	<div class="w3-container">
-		<p>Do your symptoms improve when you are indoors?</p>
-		<a href="#six" onclick="allergyAdd();" class="w3-btn w3-black">Yes</a>
-		<a href="#six" onclick="coldAdd();" class="w3-btn w3-black">No</a>
-	</div>
-</div>
-
-<!-- New Cold Question -->
-<div class="page" id="six">
-	<div class="w3-container w3-flat-carrot">
-		<h1>Question 6</h1>
-	</div>
-
-	<div class="w3-container">
-		<p>Do you feel body aches or general fatigue?</p>
-		<a href="#resultsPage" onclick="coldAdd();" class="w3-btn w3-black">Yes</a>
-		<a href="#resultsPage" onclick="allergyAdd();" class="w3-btn w3-black">No</a>
+		<a href="#resultsPage" onclick="allergyAdd();" class="w3-btn w3-black w3-margin-right">Yes</a>
+		<a href="#resultsPage" onclick="coldAdd();" class="w3-btn w3-black">No</a>
 	</div>
 </div>
 
@@ -187,12 +178,15 @@ This app is for educational purposes only and does not provide medical advice.
 	</div>
 
 	<div class="w3-container">
+		<!-- Button triggers JavaScript calculation -->
 		<a onclick="showResults();" class="w3-btn w3-grey">Show Results</a>
+
+		<!-- Results are displayed here -->
 		<p id="results"></p>
 	</div>
 </div>
 
-<!-- Footer -->
+<!-- Footer fixed at the bottom of the screen -->
 <footer class="w3-bottom w3-container w3-flat-carrot">
 	<p>DIY Diagnostics Stream</p>
 </footer>
